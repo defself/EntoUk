@@ -1,6 +1,11 @@
-%h1 English-Ukrainian Translator
-
 = form_tag("/translate", :method => "get") do
   = label_tag(:en, "English:")
   = text_field_tag(:en)
   = submit_tag('Translate')
+
+- if @translate
+  #translate
+    = "#{@search} — #{@translate}"
+- elsif @search
+  #error
+    Oops! I don't know such word...

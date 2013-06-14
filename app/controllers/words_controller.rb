@@ -3,10 +3,11 @@ class WordsController < ApplicationController
   end
 
   def translate
-    if Word.where(en: params[:en]).first.nil?
-      render text: 'In the dictionary there is no such word...'
-    else
-      @word = Word.where(en: params[:en]).first.uk
+    @search = params[:en].blank? ? nil : params[:en].split.first
+
+    if Word.where(en: @search).first
+      @translate = Word.where(en: @search).first.uk
     end
+    render :index
   end
 end
